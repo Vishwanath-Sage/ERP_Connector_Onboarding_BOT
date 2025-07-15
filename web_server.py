@@ -331,6 +331,8 @@ def chat():
     """Handle chat messages and forward to Rasa"""
     try:
         data = request.json
+        if not data:
+            return jsonify({'error': 'Invalid JSON data'}), 400
         message = data.get('message', '')
         
         if not message:
@@ -372,26 +374,344 @@ def status():
         return jsonify({'status': 'not_ready'})
 
 def get_fallback_response(message):
-    """Provide basic fallback responses when Rasa is not available"""
+    """Provide comprehensive fallback responses when Rasa is not available"""
     message_lower = message.lower()
     
+    # Greetings
     if any(word in message_lower for word in ['hello', 'hi', 'hey', 'greet']):
-        return "Hello! Welcome to Sage Network Connectors FAQ Bot. The main bot is starting up, but I can help with basic information."
+        return "Hello! Welcome to Sage Network Connectors FAQ Bot. I can help with detailed questions about Sage APIs, invoice models, authentication, and more!"
     
+    # Sage Intacct Bills API
+    elif any(phrase in message_lower for phrase in ['intacct', 'bill', 'invoice api', 'create bill', 'accounts payable']):
+        return """**Sage Intacct Bills API:**
+
+**Key Operations:**
+• GET /objects/accounts-payable/bill - List bills
+• POST /objects/accounts-payable/bill - Create a bill
+• GET /objects/accounts-payable/bill/{key} - Get bill details
+• PATCH /objects/accounts-payable/bill/{key} - Update a bill
+
+**Required Fields:**
+• vendor (vendor ID)
+• dueDate
+• createdDate
+• lines (bill line items)
+
+Bills move through the AP workflow: creation → approval → payment."""
+    
+    # Invoice Models
+    elif any(phrase in message_lower for phrase in ['invoice model', 'invoice structure', 'invoice schema', 'invoice json']):
+        return """**Invoice Model Structure:**
+
+**Core Fields:**
+• billNumber - Vendor-assigned identifier
+• vendor - {id, key} - Vendor reference
+• dueDate - Payment due date
+• createdDate - Bill creation date
+• totalTxnAmount - Total transaction amount
+• currency - {txnCurrency, baseCurrency, exchangeRate}
+
+**Example:**
+```json
+{
+  "billNumber": "INV-001",
+  "vendor": {"id": "V001"},
+  "dueDate": "2025-01-30",
+  "lines": [...]
+}
+```"""
+    
+    # Payment Processing
+    elif any(phrase in message_lower for phrase in ['payment', 'pay bill', 'payment processing', 'payment workflow']):
+        return """**Payment Processing in Sage:**
+
+**Payment Workflow:**
+1. Create bills with payment information
+2. Set recommendedPaymentDate
+3. Use payment priority (urgent/high/normal/low)
+4. Process through AP workflow
+5. Generate payment requests
+6. Execute payments
+
+**Key Fields:**
+• paymentInformation.fullyPaidDate
+• paymentInformation.totalAmountPaid
+• recommendedPaymentDate
+• paymentPriority"""
+    
+    # OAuth Authentication
+    elif any(phrase in message_lower for phrase in ['oauth', 'access token', 'refresh token', 'bearer token']):
+        return """**OAuth 2.0 Authentication:**
+
+**Setup Process:**
+1. Register application in developer portal
+2. Obtain client credentials (client_id, client_secret)
+3. Implement authorization flow
+4. Handle access/refresh tokens
+
+**Authorization Header:**
+```
+Authorization: Bearer {access_token}
+```
+
+**Token expires in 3600 seconds (1 hour)**"""
+    
+    # API Keys
+    elif any(phrase in message_lower for phrase in ['api key', 'api credential', 'developer key']):
+        return """**API Key Management:**
+
+**Getting API Keys:**
+1. Access Sage Developer Portal
+2. Create new application
+3. Generate API credentials
+4. Configure permissions and scopes
+5. Download credentials securely
+
+**Include API key in request headers:**
+```
+X-API-Key: {your_api_key}
+```
+
+**Security: Never expose keys in client-side code!**"""
+    
+    # Error Codes
+    elif any(phrase in message_lower for phrase in ['error', 'error code', 'http error', '400', '401', '403', '404', '500']):
+        return """**Common HTTP Error Codes:**
+
+**Client Errors (4xx):**
+• 400 Bad Request - Invalid request syntax/parameters
+• 401 Unauthorized - Missing or invalid authentication
+• 403 Forbidden - Insufficient permissions
+• 404 Not Found - Resource doesn't exist
+• 429 Too Many Requests - Rate limit exceeded
+
+**Server Errors (5xx):**
+• 500 Internal Server Error - Unexpected server error
+• 503 Service Unavailable - Service temporarily down"""
+    
+    # Rate Limits
+    elif any(phrase in message_lower for phrase in ['rate limit', 'throttling', 'too many requests', 'quota']):
+        return """**Rate Limiting Information:**
+
+**Rate Limits:**
+• 1000 requests per hour (standard)
+• 10,000 requests per hour (premium)
+• Burst allowance for short spikes
+
+**429 Too Many Requests Response:**
+```json
+{
+  "error": "Rate limit exceeded",
+  "retry_after": 3600
+}
+```
+
+**Best Practice: Implement exponential backoff**"""
+    
+    # REST API Endpoints
+    elif any(phrase in message_lower for phrase in ['endpoint', 'rest api', 'api url', 'base url']):
+        return """**Main API Endpoints:**
+
+**Bills Management:**
+• GET /objects/accounts-payable/bill
+• POST /objects/accounts-payable/bill
+• GET /objects/accounts-payable/bill/{key}
+• PATCH /objects/accounts-payable/bill/{key}
+
+**Vendors:**
+• GET /objects/accounts-payable/vendor
+• POST /objects/accounts-payable/vendor
+
+**Base URL:** https://api.intacct.com
+**All endpoints require authentication**"""
+    
+    # Currency and Exchange Rates
+    elif any(phrase in message_lower for phrase in ['currency', 'exchange rate', 'multi-currency', 'foreign currency']):
+        return """**Multi-Currency Support:**
+
+**Currency Structure:**
+• txnCurrency - Transaction currency (e.g., USD, EUR)
+• baseCurrency - Company base currency
+• exchangeRate - Conversion details
+
+**Exchange Rate Object:**
+```json
+{
+  "date": "2025-01-15",
+  "rate": 1.0789,
+  "typeId": "Daily Rate"
+}
+```
+
+**Multi-currency bills automatically calculate base amounts using the specified exchange rate.**"""
+    
+    # Tax Handling
+    elif any(phrase in message_lower for phrase in ['tax', 'vat', 'gst', 'tax code', 'tax rate']):
+        return """**Tax Management:**
+
+**Tax Configuration:**
+• Tax codes (T0-T99)
+• Tax rates and calculations
+• Tax inclusive vs. exclusive pricing
+• VAT/GST processing
+
+**Tax Fields:**
+• isTaxInclusive - Boolean flag
+• taxCode - Tax code reference
+• taxRate - Percentage rate
+• taxAmount - Calculated tax
+
+**Tax is calculated automatically based on configured tax codes and rates.**"""
+    
+    # Webhooks
+    elif any(phrase in message_lower for phrase in ['webhook', 'event notification', 'real-time', 'callback']):
+        return """**Webhook Configuration:**
+
+**Event Types:**
+• Bill created/updated/deleted
+• Payment processed
+• Vendor changes
+• Approval workflow events
+
+**Payload Example:**
+```json
+{
+  "event": "bill.created",
+  "data": {
+    "key": "123",
+    "billNumber": "INV-001"
+  },
+  "timestamp": "2025-01-15T10:30:00Z"
+}
+```
+
+**Webhooks enable real-time notifications for system events.**"""
+    
+    # Batch Processing
+    elif any(phrase in message_lower for phrase in ['batch', 'bulk', 'mass', 'multiple']):
+        return """**Batch Processing:**
+
+**Bulk Operations:**
+• Multiple bill creation
+• Batch payments
+• Mass data updates
+• Bulk imports/exports
+
+**Implementation:**
+```json
+{
+  "requests": [
+    {"method": "POST", "url": "/bill", "body": {...}},
+    {"method": "POST", "url": "/bill", "body": {...}}
+  ]
+}
+```
+
+**Best Practice: Process in reasonable batch sizes with proper error handling.**"""
+    
+    # Sage 50 Integration
+    elif any(phrase in message_lower for phrase in ['sage 50', 'desktop', 'odbc', 'invoice item']):
+        return """**Sage 50 Integration:**
+
+**Desktop Integration:**
+• ODBC data access
+• SDO (Sage Data Objects)
+• File-based import/export
+
+**Invoice Data Structure:**
+• INVOICE table - Header information
+• INVOICE_ITEM table - Line items
+• Fields: STOCK_CODE, QUANTITY, UNIT_PRICE
+• Tax codes and calculations
+
+**Key Fields:**
+• INVOICE_NUMBER (INTEGER)
+• STOCK_CODE (VARCHAR 30)
+• NET_AMOUNT, TAX_AMOUNT, GROSS_AMOUNT"""
+    
+    # General Sage Network Connectors
     elif any(word in message_lower for word in ['what', 'sage', 'network', 'connector']):
-        return "Sage Network Connectors are APIs and integration tools for connecting with Sage systems. Visit https://internaldeveloper.sage.com/network-connectors for documentation."
+        return """**Sage Network Connectors:**
+
+Comprehensive APIs and integration tools for connecting with Sage systems:
+
+• **Data Sync Connectors** - Real-time data synchronization
+• **Webhook Connectors** - Event-driven integrations  
+• **REST API Connectors** - Standard HTTP-based communication
+• **Batch Processing Connectors** - Bulk data operations
+
+**Documentation:** https://internaldeveloper.sage.com/network-connectors"""
     
+    # Getting Started
     elif any(word in message_lower for word in ['start', 'begin', 'getting']):
-        return "To get started: 1) Visit the developer portal, 2) Register for API access, 3) Review documentation, 4) Set up authentication. The full bot will provide more detailed guidance once it's ready."
+        return """**Getting Started with Sage Network Connectors:**
+
+1. **Visit the developer portal** at https://internaldeveloper.sage.com/network-connectors
+2. **Register for API access** and create your application
+3. **Review the API documentation** and choose your integration approach
+4. **Set up authentication** (API keys or OAuth 2.0)
+5. **Start with basic API calls** to test connectivity
+6. **Implement error handling** and production-ready code
+
+**Choose from REST APIs, webhooks, or batch processing based on your needs.**"""
     
+    # API Documentation
     elif any(word in message_lower for word in ['api', 'documentation', 'docs']):
-        return "API documentation is available at:\n• Developer Portal: https://internaldeveloper.sage.com/network-connectors\n• Swagger API: https://connector-qa.network-eng.sage.com/swagger/index.html"
+        return """**API Documentation Resources:**
+
+**Main Documentation:**
+• Developer Portal: https://internaldeveloper.sage.com/network-connectors
+• Swagger API Reference: https://connector-qa.network-eng.sage.com/swagger/index.html
+
+**What you'll find:**
+• Complete endpoint reference
+• Request/response examples
+• Authentication details
+• Error code explanations
+• Integration guides
+• SDK downloads
+
+**All resources include detailed examples and best practices.**"""
     
+    # Authentication
     elif any(word in message_lower for word in ['auth', 'authentication', 'login']):
-        return "Authentication typically uses API keys or OAuth 2.0. Register your application in the developer portal to get credentials."
+        return """**Authentication Methods:**
+
+**OAuth 2.0 (Recommended):**
+• Access tokens (1-hour expiry)
+• Refresh tokens for renewal
+• Secure authorization flow
+
+**API Keys:**
+• Simple header-based authentication
+• Good for server-to-server integration
+• Include as: X-API-Key: {your_key}
+
+**Setup:**
+1. Register your application in the developer portal
+2. Choose authentication method
+3. Obtain credentials
+4. Implement in your code
+
+**Always store credentials securely!**"""
     
+    # Default response
     else:
-        return "I'm a basic fallback while the main FAQ bot is starting up. For detailed help, please wait for the full bot to be ready, or visit the developer documentation."
+        return """I'm your enhanced Sage Network Connectors FAQ Bot! I can help with:
+
+**🔧 Technical Topics:**
+• Sage Intacct Bills API & Invoice Models
+• Payment Processing & Multi-Currency
+• OAuth Authentication & API Keys
+• Error Handling & Rate Limits
+
+**🚀 Integration Topics:**
+• REST API Endpoints & Request Formats
+• Webhooks & Batch Processing
+• Sage 50/200 Integration
+• Data Synchronization
+
+**Ask me anything about Sage APIs, authentication, error codes, or integration!**"""
 
 if __name__ == '__main__':
     print("🚀 Starting Sage Network Connectors FAQ Bot Web Server...")

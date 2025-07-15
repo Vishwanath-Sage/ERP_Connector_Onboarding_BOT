@@ -15,6 +15,31 @@ intents:
   - error_codes
   - contact_support
   - bot_challenge
+  # Technical Sage API Intents
+  - sage_intacct_bills
+  - invoice_models
+  - bill_line_items
+  - payment_processing
+  - currency_exchange
+  - tax_handling
+  - vendor_management
+  - oauth_authentication
+  - api_keys
+  - http_error_codes
+  - validation_errors
+  - rate_limit_errors
+  - rest_api_endpoints
+  - request_response_format
+  - pagination
+  - filtering_searching
+  - sage_intacct_features
+  - sage_50_integration
+  - sage_200_integration
+  - webhooks
+  - batch_processing
+  - data_synchronization
+  - custom_fields
+  - reporting_analytics
 
 responses:
   utter_greet:
@@ -34,8 +59,86 @@ responses:
   utter_api_documentation:
   - text: "You can find the complete API documentation at:\n• Developer Portal: https://internaldeveloper.sage.com/network-connectors\n• Swagger API Reference: https://connector-qa.network-eng.sage.com/swagger/index.html\n\nThese resources include endpoints, request/response examples, and authentication details."
 
+  # SAGE INTACCT INVOICE/BILL APIs
+  utter_sage_intacct_bills:
+  - text: "Sage Intacct Bills API allows you to manage Accounts Payable bills:\n\n**Key Operations:**\n• GET /objects/accounts-payable/bill - List bills\n• POST /objects/accounts-payable/bill - Create a bill\n• GET /objects/accounts-payable/bill/{key} - Get bill details\n• PATCH /objects/accounts-payable/bill/{key} - Update a bill\n• DELETE /objects/accounts-payable/bill/{key} - Delete a bill\n\n**Required Fields:**\n• vendor (vendor ID)\n• dueDate\n• createdDate\n• lines (bill line items)\n\nBills move through the AP workflow: creation → approval → payment."
+
+  utter_invoice_models:
+  - text: "**Invoice Model Structure:**\n\n**Core Fields:**\n• billNumber - Vendor-assigned identifier\n• vendor - {id, key} - Vendor reference\n• dueDate - Payment due date\n• createdDate - Bill creation date\n• totalTxnAmount - Total transaction amount\n• currency - {txnCurrency, baseCurrency, exchangeRate}\n\n**Optional Fields:**\n• referenceNumber - PO or account number\n• description - Additional information\n• paymentPriority - urgent/high/normal/low\n• isOnHold - Hold status\n• lines[] - Array of line items\n\n**Example:**\n```json\n{\n  \"billNumber\": \"INV-001\",\n  \"vendor\": {\"id\": \"V001\"},\n  \"dueDate\": \"2025-01-30\",\n  \"lines\": [...]\n}\n```"
+
+  utter_bill_line_items:
+  - text: "**Bill Line Items Structure:**\n\n**Required Fields:**\n• txnAmount - Line item amount\n• glAccount - {id} - General Ledger account\n\n**Optional Fields:**\n• memo - Line item description\n• dimensions - {department, location, project, customer}\n• hasForm1099 - 1099 tracking flag\n• taxEntries - Tax information\n• allocation - Transaction allocation template\n\n**Example Line Item:**\n```json\n{\n  \"glAccount\": {\"id\": \"6000\"},\n  \"txnAmount\": \"100.00\",\n  \"memo\": \"Professional services\",\n  \"dimensions\": {\n    \"department\": {\"id\": \"IT\"},\n    \"project\": {\"id\": \"PROJ001\"}\n  }\n}\n```"
+
+  utter_payment_processing:
+  - text: "**Payment Processing in Sage:**\n\n**Payment Workflow:**\n1. Create bills with payment information\n2. Set recommendedPaymentDate\n3. Use payment priority (urgent/high/normal/low)\n4. Process through AP workflow\n5. Generate payment requests\n6. Execute payments\n\n**Payment API Features:**\n• Batch payment processing\n• Multiple payment methods\n• Payment scheduling\n• Approval workflows\n• Payment tracking\n\n**Key Fields:**\n• paymentInformation.fullyPaidDate\n• paymentInformation.totalAmountPaid\n• recommendedPaymentDate\n• paymentPriority\n\nPayments can be automated or require manual approval based on company policies."
+
+  utter_currency_exchange:
+  - text: "**Multi-Currency Support:**\n\n**Currency Structure:**\n• txnCurrency - Transaction currency (e.g., USD, EUR)\n• baseCurrency - Company base currency\n• exchangeRate - Conversion details\n\n**Exchange Rate Object:**\n```json\n{\n  \"date\": \"2025-01-15\",\n  \"rate\": 1.0789,\n  \"typeId\": \"Daily Rate\"\n}\n```\n\n**Key Concepts:**\n• Transaction amounts in foreign currency\n• Base amounts calculated using exchange rates\n• Exchange rate types (daily, custom, fixed)\n• Rate date flexibility (transaction, payment, current)\n\n**Multi-currency bills automatically calculate base amounts using the specified exchange rate.**"
+
+  utter_tax_handling:
+  - text: "**Tax Management:**\n\n**Tax Configuration:**\n• Tax codes (T0-T99)\n• Tax rates and calculations\n• Tax inclusive vs. exclusive pricing\n• VAT/GST processing\n• Tax solutions integration\n\n**Tax Fields:**\n• isTaxInclusive - Boolean flag\n• taxSolution - {id, key}\n• taxCode - Tax code reference\n• taxRate - Percentage rate\n• taxAmount - Calculated tax\n\n**Tax Types:**\n• Standard VAT/GST\n• Regional tax codes\n• Custom tax solutions\n• Multi-jurisdiction support\n\n**Tax is calculated automatically based on tax codes and rates configured in your Sage system.**"
+
+  utter_vendor_management:
+  - text: "**Vendor Management:**\n\n**Vendor Object:**\n• id - Unique vendor identifier\n• name - Vendor display name\n• vendorDue - Outstanding amount\n• form1099 - Tax form information\n\n**Vendor Contacts:**\n• payTo - Primary payment contact\n• returnTo - Return correspondence contact\n\n**Key Features:**\n• Vendor registration and setup\n• Contact information management\n• Payment terms configuration\n• 1099 tax form tracking\n• Vendor performance analytics\n\n**API Endpoints:**\n• /objects/accounts-payable/vendor\n• Vendor creation, updates, retrieval\n• Contact management\n• Payment history tracking"
+
+  # AUTHENTICATION & SECURITY
+  utter_oauth_authentication:
+  - text: "**OAuth 2.0 Authentication:**\n\n**Setup Process:**\n1. Register application in developer portal\n2. Obtain client credentials (client_id, client_secret)\n3. Implement authorization flow\n4. Handle access/refresh tokens\n\n**Token Types:**\n• Access Token - For API requests\n• Refresh Token - To renew access tokens\n• Expires in 3600 seconds (1 hour)\n\n**Authorization Header:**\n```\nAuthorization: Bearer {access_token}\n```\n\n**Token Refresh:**\n```json\n{\n  \"grant_type\": \"refresh_token\",\n  \"refresh_token\": \"{refresh_token}\"\n}\n```\n\n**Best Practices:**\n• Store tokens securely\n• Implement automatic refresh\n• Handle token expiration gracefully"
+
+  utter_api_keys:
+  - text: "**API Key Management:**\n\n**Getting API Keys:**\n1. Access Sage Developer Portal\n2. Create new application\n3. Generate API credentials\n4. Configure permissions and scopes\n5. Download credentials securely\n\n**API Key Types:**\n• Development keys - For testing\n• Production keys - For live systems\n• Scoped keys - Limited permissions\n\n**Security Best Practices:**\n• Never expose keys in client-side code\n• Use environment variables\n• Rotate keys regularly\n• Monitor key usage\n• Implement proper error handling\n\n**Include API key in request headers:**\n```\nX-API-Key: {your_api_key}\n```"
+
   utter_authentication_help:
   - text: "Sage Network Connectors typically use API keys or OAuth 2.0 for authentication. Here's how to set it up:\n1. Register your application in the developer portal\n2. Obtain your API credentials\n3. Include authentication headers in your requests\n4. Handle token refresh if using OAuth\n\nFor specific authentication methods, check the API documentation."
+
+  # ERROR HANDLING & TROUBLESHOOTING
+  utter_http_error_codes:
+  - text: "**HTTP Error Codes Reference:**\n\n**Client Errors (4xx):**\n• 400 Bad Request - Invalid request syntax/parameters\n• 401 Unauthorized - Missing or invalid authentication\n• 403 Forbidden - Insufficient permissions\n• 404 Not Found - Resource doesn't exist\n• 409 Conflict - Resource conflict (duplicate)\n• 422 Unprocessable Entity - Validation failed\n• 429 Too Many Requests - Rate limit exceeded\n\n**Server Errors (5xx):**\n• 500 Internal Server Error - Unexpected server error\n• 502 Bad Gateway - Upstream server error\n• 503 Service Unavailable - Service temporarily down\n• 504 Gateway Timeout - Request timeout\n\n**Response includes detailed error messages in JSON format for troubleshooting.**"
+
+  utter_validation_errors:
+  - text: "**Common Validation Errors:**\n\n**Required Field Errors:**\n• Missing vendor information\n• Missing due date\n• Missing line items\n• Missing GL account references\n\n**Format Errors:**\n• Invalid date formats (use YYYY-MM-DD)\n• Invalid decimal precision\n• Invalid currency codes\n• Invalid reference IDs\n\n**Business Rule Violations:**\n• Inactive vendor references\n• Closed accounting periods\n• Invalid GL account mappings\n• Insufficient permissions\n\n**Error Response Example:**\n```json\n{\n  \"ia::error\": {\n    \"code\": \"InvalidField\",\n    \"message\": \"Field 'dueDate' is required\"\n  }\n}\n```"
+
+  utter_rate_limit_errors:
+  - text: "**Rate Limiting Information:**\n\n**Rate Limits:**\n• 1000 requests per hour (standard)\n• 10,000 requests per hour (premium)\n• Burst allowance for short spikes\n\n**Rate Limit Headers:**\n```\nX-RateLimit-Limit: 1000\nX-RateLimit-Remaining: 999\nX-RateLimit-Reset: 1609459200\n```\n\n**429 Too Many Requests Response:**\n```json\n{\n  \"error\": \"Rate limit exceeded\",\n  \"retry_after\": 3600\n}\n```\n\n**Best Practices:**\n• Implement exponential backoff\n• Monitor rate limit headers\n• Cache responses when possible\n• Use batch operations for bulk data"
+
+  # TECHNICAL IMPLEMENTATION
+  utter_rest_api_endpoints:
+  - text: "**Main API Endpoints:**\n\n**Bills Management:**\n• GET /objects/accounts-payable/bill\n• POST /objects/accounts-payable/bill\n• GET /objects/accounts-payable/bill/{key}\n• PATCH /objects/accounts-payable/bill/{key}\n\n**Vendors:**\n• GET /objects/accounts-payable/vendor\n• POST /objects/accounts-payable/vendor\n\n**Payments:**\n• GET /objects/accounts-payable/payment\n• POST /objects/accounts-payable/payment\n\n**Reference Data:**\n• GET /objects/general-ledger/account\n• GET /objects/company-config/location\n• GET /objects/company-config/department\n\n**Base URL:** https://api.intacct.com\n**All endpoints require authentication and proper headers.**"
+
+  utter_request_response_format:
+  - text: "**Request/Response Format:**\n\n**Request Headers:**\n```\nContent-Type: application/json\nAuthorization: Bearer {token}\nAccept: application/json\n```\n\n**Standard Response Structure:**\n```json\n{\n  \"ia::result\": {\n    \"key\": \"123\",\n    \"id\": \"INV-001\",\n    \"href\": \"/objects/accounts-payable/bill/123\"\n  },\n  \"ia::meta\": {\n    \"totalCount\": 1,\n    \"totalSuccess\": 1,\n    \"totalError\": 0\n  }\n}\n```\n\n**Error Response:**\n```json\n{\n  \"ia::error\": {\n    \"code\": \"InvalidRequest\",\n    \"message\": \"Detailed error description\"\n  }\n}\n```"
+
+  utter_pagination:
+  - text: "**API Pagination:**\n\n**Query Parameters:**\n• size - Number of records (max 100)\n• start - Starting record number\n• orderBy - Sort field and direction\n\n**Example Request:**\n```\nGET /objects/accounts-payable/bill?size=50&start=1&orderBy=createdDate desc\n```\n\n**Response Metadata:**\n```json\n{\n  \"ia::result\": [...],\n  \"ia::meta\": {\n    \"totalCount\": 250,\n    \"start\": 1,\n    \"pageSize\": 50,\n    \"next\": \"/objects/accounts-payable/bill?start=51\"\n  }\n}\n```\n\n**Large datasets are automatically paginated. Use the 'next' URL for subsequent pages.**"
+
+  utter_filtering_searching:
+  - text: "**Filtering and Search:**\n\n**Query Operations:**\n• Filtering by field values\n• Date range queries\n• Text search capabilities\n• Multiple condition support\n\n**Filter Examples:**\n```\n?filter=state='posted'\n?filter=createdDate>='2025-01-01'\n?filter=vendor.id='V001'\n?filter=totalTxnAmount>=100.00\n```\n\n**Search Parameters:**\n• q - General text search\n• fields - Specify return fields\n• orderBy - Sort results\n\n**Complex Filtering:**\n```\n?filter=state='posted' and createdDate>='2025-01-01' and totalTxnAmount>=100.00\n```\n\n**Use filtering to optimize API performance and reduce data transfer.**"
+
+  # SAGE PRODUCT SPECIFICS
+  utter_sage_intacct_features:
+  - text: "**Sage Intacct Key Features:**\n\n**Financial Management:**\n• Accounts Payable/Receivable\n• General Ledger\n• Cash Management\n• Multi-entity consolidation\n• Financial reporting\n\n**API Modules:**\n• Bills and payments\n• Customer invoicing\n• Purchase orders\n• Inventory management\n• Project accounting\n• Time and expense\n\n**Advanced Capabilities:**\n• Multi-currency support\n• Dimension tracking\n• Approval workflows\n• Real-time reporting\n• Integration platform\n\n**Intacct provides cloud-based ERP with comprehensive APIs for third-party integration.**"
+
+  utter_sage_50_integration:
+  - text: "**Sage 50 Integration:**\n\n**Desktop Integration:**\n• ODBC data access\n• SDO (Sage Data Objects)\n• File-based import/export\n• Third-party connectors\n\n**Invoice Data Structure:**\n• INVOICE table - Header information\n• INVOICE_ITEM table - Line items\n• Fields: STOCK_CODE, QUANTITY, UNIT_PRICE\n• Tax codes and calculations\n\n**Key Fields:**\n• INVOICE_NUMBER (INTEGER)\n• STOCK_CODE (VARCHAR 30)\n• DESCRIPTION (VARCHAR 60)\n• QUANTITY, UNIT_PRICE (DOUBLE)\n• TAX_CODE, TAX_RATE\n• NET_AMOUNT, TAX_AMOUNT, GROSS_AMOUNT\n\n**Best Practices:**\n• Use ODBC for real-time data access\n• Implement proper error handling\n• Validate data before import"
+
+  utter_sage_200_integration:
+  - text: "**Sage 200 Integration:**\n\n**Integration Methods:**\n• Sage 200 API\n• ODBC connectivity\n• Web services\n• File-based integration\n\n**Core Modules:**\n• Sales and purchase ledgers\n• Stock management\n• Nominal ledger\n• Manufacturing\n• CRM integration\n\n**API Features:**\n• RESTful endpoints\n• Real-time data access\n• Comprehensive business objects\n• Security and authentication\n• Multi-company support\n\n**Use Cases:**\n• E-commerce integration\n• Third-party app connectivity\n• Data synchronization\n• Reporting and analytics\n\n**Sage 200 provides enterprise-level ERP functionality with robust integration capabilities.**"
+
+  # ADVANCED FEATURES
+  utter_webhooks:
+  - text: "**Webhook Configuration:**\n\n**Event Types:**\n• Bill created/updated/deleted\n• Payment processed\n• Vendor changes\n• Approval workflow events\n• Data synchronization events\n\n**Webhook Setup:**\n1. Configure endpoint URL\n2. Select event types\n3. Set authentication method\n4. Test webhook delivery\n5. Handle retry logic\n\n**Payload Example:**\n```json\n{\n  \"event\": \"bill.created\",\n  \"data\": {\n    \"key\": \"123\",\n    \"billNumber\": \"INV-001\"\n  },\n  \"timestamp\": \"2025-01-15T10:30:00Z\"\n}\n```\n\n**Webhooks enable real-time notifications for system events and data changes.**"
+
+  utter_batch_processing:
+  - text: "**Batch Processing:**\n\n**Bulk Operations:**\n• Multiple bill creation\n• Batch payments\n• Mass data updates\n• Bulk imports/exports\n\n**Batch API Features:**\n• Async processing\n• Status tracking\n• Error reporting\n• Rollback capabilities\n\n**Implementation:**\n```json\n{\n  \"requests\": [\n    {\"method\": \"POST\", \"url\": \"/bill\", \"body\": {...}},\n    {\"method\": \"POST\", \"url\": \"/bill\", \"body\": {...}}\n  ]\n}\n```\n\n**Best Practices:**\n• Process in reasonable batch sizes\n• Implement error handling\n• Monitor batch job status\n• Use asynchronous processing for large batches"
+
+  utter_data_synchronization:
+  - text: "**Data Synchronization:**\n\n**Sync Strategies:**\n• Real-time sync with webhooks\n• Scheduled batch synchronization\n• Change-based delta sync\n• Full refresh synchronization\n\n**Sync Patterns:**\n• One-way sync (source → target)\n• Bi-directional sync\n• Master-slave configuration\n• Conflict resolution strategies\n\n**Implementation Considerations:**\n• Data mapping and transformation\n• Error handling and retry logic\n• Audit trails and logging\n• Performance optimization\n\n**Tools:**\n• ETL platforms\n• Message queues\n• Integration platforms\n• Custom sync applications\n\n**Ensure data consistency across integrated systems.**"
+
+  utter_custom_fields:
+  - text: "**Custom Fields:**\n\n**Configuration:**\n• User-defined fields (UDF)\n• Extended properties\n• Additional data capture\n• Flexible data models\n\n**Field Types:**\n• Text fields\n• Numeric fields\n• Date fields\n• Boolean flags\n• Dropdown lists\n\n**API Usage:**\n```json\n{\n  \"customFields\": {\n    \"projectCode\": \"PROJ001\",\n    \"costCenter\": \"IT-DEPT\",\n    \"approvalLevel\": \"Manager\"\n  }\n}\n```\n\n**Custom fields enable capture of organization-specific data not covered by standard fields.**"
+
+  utter_reporting_analytics:
+  - text: "**Reporting & Analytics:**\n\n**Reporting Options:**\n• Standard financial reports\n• Custom report generation\n• Real-time dashboards\n• Scheduled report delivery\n• Data export capabilities\n\n**Analytics Features:**\n• KPI tracking\n• Trend analysis\n• Variance reporting\n• Drill-down capabilities\n• Multi-dimensional analysis\n\n**API Access:**\n• Report data extraction\n• Custom analytics queries\n• Data warehouse integration\n• Business intelligence feeds\n\n**Export Formats:**\n• JSON, XML, CSV\n• Excel spreadsheets\n• PDF reports\n• Database direct access\n\n**Build custom analytics solutions using Sage data APIs.**"
 
   utter_connector_types:
   - text: "Sage Network Connectors include various types:\n• Data Sync Connectors - for real-time data synchronization\n• Webhook Connectors - for event-driven integrations\n• REST API Connectors - for standard HTTP-based communication\n• Batch Processing Connectors - for bulk data operations\n\nEach type serves different integration needs and use cases."

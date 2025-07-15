@@ -66,3 +66,129 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+# SAGE INTACCT INVOICE/BILL API RULES
+- rule: Answer questions about Sage Intacct bills
+  steps:
+  - intent: sage_intacct_bills
+  - action: utter_sage_intacct_bills
+
+- rule: Answer questions about invoice models
+  steps:
+  - intent: invoice_models
+  - action: utter_invoice_models
+
+- rule: Answer questions about bill line items
+  steps:
+  - intent: bill_line_items
+  - action: utter_bill_line_items
+
+- rule: Answer questions about payment processing
+  steps:
+  - intent: payment_processing
+  - action: utter_payment_processing
+
+- rule: Answer questions about currency exchange
+  steps:
+  - intent: currency_exchange
+  - action: utter_currency_exchange
+
+- rule: Answer questions about tax handling
+  steps:
+  - intent: tax_handling
+  - action: utter_tax_handling
+
+- rule: Answer questions about vendor management
+  steps:
+  - intent: vendor_management
+  - action: utter_vendor_management
+
+# AUTHENTICATION & SECURITY RULES
+- rule: Answer questions about OAuth authentication
+  steps:
+  - intent: oauth_authentication
+  - action: utter_oauth_authentication
+
+- rule: Answer questions about API keys
+  steps:
+  - intent: api_keys
+  - action: utter_api_keys
+
+# ERROR HANDLING & TROUBLESHOOTING RULES
+- rule: Answer questions about HTTP error codes
+  steps:
+  - intent: http_error_codes
+  - action: utter_http_error_codes
+
+- rule: Answer questions about validation errors
+  steps:
+  - intent: validation_errors
+  - action: utter_validation_errors
+
+- rule: Answer questions about rate limit errors
+  steps:
+  - intent: rate_limit_errors
+  - action: utter_rate_limit_errors
+
+# TECHNICAL IMPLEMENTATION RULES
+- rule: Answer questions about REST API endpoints
+  steps:
+  - intent: rest_api_endpoints
+  - action: utter_rest_api_endpoints
+
+- rule: Answer questions about request response format
+  steps:
+  - intent: request_response_format
+  - action: utter_request_response_format
+
+- rule: Answer questions about pagination
+  steps:
+  - intent: pagination
+  - action: utter_pagination
+
+- rule: Answer questions about filtering and searching
+  steps:
+  - intent: filtering_searching
+  - action: utter_filtering_searching
+
+# SAGE PRODUCT SPECIFIC RULES
+- rule: Answer questions about Sage Intacct features
+  steps:
+  - intent: sage_intacct_features
+  - action: utter_sage_intacct_features
+
+- rule: Answer questions about Sage 50 integration
+  steps:
+  - intent: sage_50_integration
+  - action: utter_sage_50_integration
+
+- rule: Answer questions about Sage 200 integration
+  steps:
+  - intent: sage_200_integration
+  - action: utter_sage_200_integration
+
+# ADVANCED FEATURES RULES
+- rule: Answer questions about webhooks
+  steps:
+  - intent: webhooks
+  - action: utter_webhooks
+
+- rule: Answer questions about batch processing
+  steps:
+  - intent: batch_processing
+  - action: utter_batch_processing
+
+- rule: Answer questions about data synchronization
+  steps:
+  - intent: data_synchronization
+  - action: utter_data_synchronization
+
+- rule: Answer questions about custom fields
+  steps:
+  - intent: custom_fields
+  - action: utter_custom_fields
+
+- rule: Answer questions about reporting and analytics
+  steps:
+  - intent: reporting_analytics
+  - action: utter_reporting_analytics

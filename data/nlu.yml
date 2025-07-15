@@ -59,6 +59,105 @@ nlu:
     - I need API documentation
     - Documentation for the API
 
+# SAGE INTACCT INVOICE/BILL APIs
+- intent: sage_intacct_bills
+  examples: |
+    - How do I create a bill in Sage Intacct?
+    - What is the bills API?
+    - How to create an AP bill?
+    - Bill creation API endpoints
+    - Sage Intacct bill management
+    - How do I update a bill?
+    - Delete a bill in Intacct
+    - Get bill details API
+    - List bills endpoint
+    - Bill workflow in Sage Intacct
+
+- intent: invoice_models
+  examples: |
+    - What is the invoice model structure?
+    - Invoice API schema
+    - Invoice data model
+    - How to structure invoice data?
+    - Invoice fields and properties
+    - What fields are required for invoices?
+    - Invoice JSON structure
+    - Invoice object properties
+    - Invoice model documentation
+
+- intent: bill_line_items
+  examples: |
+    - How do I add line items to a bill?
+    - Bill line item structure
+    - What are bill line items?
+    - Line item properties
+    - How to manage bill lines?
+    - Bill line API
+    - Line item fields
+    - Adding multiple line items
+
+- intent: payment_processing
+  examples: |
+    - How do I process payments?
+    - Payment API endpoints
+    - Create payment requests
+    - Payment workflow
+    - How to pay bills?
+    - Payment processing guide
+    - Payment methods
+    - Online payment integration
+
+- intent: currency_exchange
+  examples: |
+    - How do I handle multi-currency?
+    - Currency exchange rates
+    - Foreign currency bills
+    - Exchange rate API
+    - Multi-currency support
+    - Base currency vs transaction currency
+    - Currency conversion
+
+- intent: tax_handling
+  examples: |
+    - How do I handle taxes in bills?
+    - Tax calculation API
+    - Tax inclusive vs exclusive
+    - Tax codes and rates
+    - VAT handling
+    - Tax entries
+    - Tax solutions
+    - GST processing
+
+- intent: vendor_management
+  examples: |
+    - How do I manage vendors?
+    - Vendor API endpoints
+    - Create vendor records
+    - Vendor information
+    - Vendor contacts
+    - Pay-to and return-to contacts
+    - Vendor setup
+
+# AUTHENTICATION & SECURITY
+- intent: oauth_authentication
+  examples: |
+    - How do I use OAuth with Sage APIs?
+    - OAuth2 authentication
+    - Access tokens
+    - Refresh tokens
+    - API authentication
+    - OAuth setup guide
+    - Authentication flow
+
+- intent: api_keys
+  examples: |
+    - How do I get API keys?
+    - API key management
+    - Generate API credentials
+    - API key setup
+    - Developer API keys
+    - API authentication keys
+
 - intent: authentication_help
   examples: |
     - How do I authenticate?
@@ -70,6 +169,34 @@ nlu:
     - API key setup
     - How to get API credentials?
     - Authentication methods
+
+# ERROR HANDLING & TROUBLESHOOTING
+- intent: http_error_codes
+  examples: |
+    - What does HTTP 400 mean?
+    - HTTP 401 unauthorized error
+    - 403 forbidden error
+    - 404 not found error
+    - 500 internal server error
+    - API error codes
+    - HTTP status codes
+
+- intent: validation_errors
+  examples: |
+    - Required field validation errors
+    - Invalid data format errors
+    - Field validation issues
+    - Data validation problems
+    - Required fields missing
+    - Invalid field values
+
+- intent: rate_limit_errors
+  examples: |
+    - Rate limit exceeded error
+    - Too many requests error
+    - API throttling
+    - Request quota exceeded
+    - Rate limiting issues
 
 - intent: connector_types
   examples: |
@@ -102,6 +229,115 @@ nlu:
     - How do I integrate with Sage?
     - Connection setup
     - System integration
+
+# TECHNICAL IMPLEMENTATION
+- intent: rest_api_endpoints
+  examples: |
+    - What are the REST API endpoints?
+    - API endpoint URLs
+    - REST API reference
+    - Available API endpoints
+    - API routes
+    - Endpoint documentation
+
+- intent: request_response_format
+  examples: |
+    - What is the request format?
+    - Response format examples
+    - JSON request structure
+    - API response schema
+    - Request body format
+    - Response data structure
+
+- intent: pagination
+  examples: |
+    - How does pagination work?
+    - API pagination
+    - Large result sets
+    - Page size limits
+    - Pagination parameters
+    - Next page tokens
+
+- intent: filtering_searching
+  examples: |
+    - How do I filter results?
+    - Search functionality
+    - Query parameters
+    - Filtering options
+    - Search criteria
+    - Result filtering
+
+# SAGE PRODUCT SPECIFICS
+- intent: sage_intacct_features
+  examples: |
+    - What are Sage Intacct features?
+    - Intacct capabilities
+    - Sage Intacct modules
+    - Accounting features
+    - Financial management
+    - ERP functionality
+
+- intent: sage_50_integration
+  examples: |
+    - How do I integrate with Sage 50?
+    - Sage 50 API
+    - Sage 50 connectors
+    - Desktop integration
+    - Sage 50 schema
+    - Invoice items in Sage 50
+
+- intent: sage_200_integration
+  examples: |
+    - Sage 200 integration
+    - Sage 200 API
+    - ERP integration
+    - Business management
+    - Sage 200 features
+
+# ADVANCED FEATURES
+- intent: webhooks
+  examples: |
+    - How do webhooks work?
+    - Webhook configuration
+    - Event notifications
+    - Real-time updates
+    - Webhook endpoints
+    - Event subscriptions
+
+- intent: batch_processing
+  examples: |
+    - How do I process batches?
+    - Bulk operations
+    - Batch API
+    - Mass data processing
+    - Bulk uploads
+    - Batch imports
+
+- intent: data_synchronization
+  examples: |
+    - How do I sync data?
+    - Data synchronization
+    - Real-time sync
+    - Data consistency
+    - Sync strategies
+    - Data integration
+
+- intent: custom_fields
+  examples: |
+    - How do I use custom fields?
+    - Custom field configuration
+    - Additional data fields
+    - Extended properties
+    - User-defined fields
+
+- intent: reporting_analytics
+  examples: |
+    - How do I generate reports?
+    - Reporting API
+    - Analytics data
+    - Financial reports
+    - Custom reports
+    - Data export
 
 - intent: supported_platforms
   examples: |
