@@ -1,0 +1,1 @@
+print("Hello, world! This is your FAQ's Python project.") 

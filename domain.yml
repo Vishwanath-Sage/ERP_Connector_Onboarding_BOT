@@ -1,0 +1,66 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - what_is_sage_network_connectors
+  - how_to_get_started
+  - api_documentation
+  - authentication_help
+  - connector_types
+  - troubleshooting
+  - integration_help
+  - supported_platforms
+  - rate_limits
+  - error_codes
+  - contact_support
+  - bot_challenge
+
+responses:
+  utter_greet:
+  - text: "Hello! Welcome to Sage Network Connectors FAQ Bot. How can I help you today?"
+  - text: "Hi there! I'm here to help you with questions about Sage Network Connectors. What would you like to know?"
+
+  utter_goodbye:
+  - text: "Goodbye! Feel free to come back if you have more questions about Sage Network Connectors."
+  - text: "Have a great day! Don't hesitate to ask if you need more help with Sage Network Connectors."
+
+  utter_what_is_sage_network_connectors:
+  - text: "Sage Network Connectors are APIs and integration tools that allow third-party applications to connect and interact with Sage systems. They provide secure, standardized ways to access Sage data and functionality."
+
+  utter_how_to_get_started:
+  - text: "To get started with Sage Network Connectors:\n1. Visit the developer portal at https://internaldeveloper.sage.com/network-connectors\n2. Register for API access\n3. Review the API documentation\n4. Set up authentication\n5. Start with basic API calls\n\nWould you like more details on any of these steps?"
+
+  utter_api_documentation:
+  - text: "You can find the complete API documentation at:\n• Developer Portal: https://internaldeveloper.sage.com/network-connectors\n• Swagger API Reference: https://connector-qa.network-eng.sage.com/swagger/index.html\n\nThese resources include endpoints, request/response examples, and authentication details."
+
+  utter_authentication_help:
+  - text: "Sage Network Connectors typically use API keys or OAuth 2.0 for authentication. Here's how to set it up:\n1. Register your application in the developer portal\n2. Obtain your API credentials\n3. Include authentication headers in your requests\n4. Handle token refresh if using OAuth\n\nFor specific authentication methods, check the API documentation."
+
+  utter_connector_types:
+  - text: "Sage Network Connectors include various types:\n• Data Sync Connectors - for real-time data synchronization\n• Webhook Connectors - for event-driven integrations\n• REST API Connectors - for standard HTTP-based communication\n• Batch Processing Connectors - for bulk data operations\n\nEach type serves different integration needs and use cases."
+
+  utter_troubleshooting:
+  - text: "Common troubleshooting steps:\n1. Check your API credentials and authentication\n2. Verify endpoint URLs and request format\n3. Review error codes and messages\n4. Check rate limits and quotas\n5. Validate request parameters\n\nIf issues persist, contact support with error details and request/response logs."
+
+  utter_integration_help:
+  - text: "Integration steps:\n1. Identify your integration requirements\n2. Choose the appropriate connector type\n3. Set up authentication\n4. Implement API calls in your application\n5. Handle errors and edge cases\n6. Test thoroughly before production\n\nConsult the developer documentation for detailed integration guides."
+
+  utter_supported_platforms:
+  - text: "Sage Network Connectors support:\n• REST APIs (language-agnostic)\n• .NET applications\n• Java applications\n• Python applications\n• JavaScript/Node.js\n• Any platform that can make HTTP requests\n\nSDKs and libraries are available for popular programming languages."
+
+  utter_rate_limits:
+  - text: "API rate limits vary by connector type and subscription level:\n• Standard tier: typically 1000 requests/hour\n• Premium tier: higher limits available\n• Burst limits may apply for short-term spikes\n\nCheck your specific API documentation for exact limits and how to handle rate limit responses (HTTP 429)."
+
+  utter_error_codes:
+  - text: "Common API error codes:\n• 400 Bad Request - Invalid request format\n• 401 Unauthorized - Authentication failed\n• 403 Forbidden - Insufficient permissions\n• 404 Not Found - Resource doesn't exist\n• 429 Too Many Requests - Rate limit exceeded\n• 500 Internal Server Error - Server issue\n\nCheck the response body for detailed error messages."
+
+  utter_contact_support:
+  - text: "For additional support:\n• Check the developer portal documentation\n• Submit support tickets through the developer portal\n• Join the developer community forums\n• For urgent issues, contact enterprise support\n\nAlways include error details, request/response samples, and your API credentials (without sensitive data) when requesting help."
+
+  utter_iamabot:
+  - text: "I'm a FAQ bot specifically designed to help with Sage Network Connectors questions. I can provide information about APIs, authentication, troubleshooting, and more!"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,0 +1,62 @@
+version: "3.1"
+
+stories:
+
+- story: Greet and ask about Sage Network Connectors
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: what_is_sage_network_connectors
+  - action: utter_what_is_sage_network_connectors
+
+- story: Getting started conversation
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: how_to_get_started
+  - action: utter_how_to_get_started
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: API documentation inquiry
+  steps:
+  - intent: api_documentation
+  - action: utter_api_documentation
+  - intent: authentication_help
+  - action: utter_authentication_help
+
+- story: Troubleshooting flow
+  steps:
+  - intent: troubleshooting
+  - action: utter_troubleshooting
+  - intent: error_codes
+  - action: utter_error_codes
+  - intent: contact_support
+  - action: utter_contact_support
+
+- story: Integration help flow
+  steps:
+  - intent: integration_help
+  - action: utter_integration_help
+  - intent: connector_types
+  - action: utter_connector_types
+  - intent: supported_platforms
+  - action: utter_supported_platforms
+
+- story: Rate limits and error codes
+  steps:
+  - intent: rate_limits
+  - action: utter_rate_limits
+  - intent: error_codes
+  - action: utter_error_codes
+
+- story: Complete help session
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: how_to_get_started
+  - action: utter_how_to_get_started
+  - intent: api_documentation
+  - action: utter_api_documentation
+  - intent: goodbye
+  - action: utter_goodbye

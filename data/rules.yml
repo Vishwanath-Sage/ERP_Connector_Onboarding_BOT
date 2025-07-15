@@ -1,0 +1,68 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Answer FAQ about what is Sage Network Connectors
+  steps:
+  - intent: what_is_sage_network_connectors
+  - action: utter_what_is_sage_network_connectors
+
+- rule: Answer FAQ about getting started
+  steps:
+  - intent: how_to_get_started
+  - action: utter_how_to_get_started
+
+- rule: Answer FAQ about API documentation
+  steps:
+  - intent: api_documentation
+  - action: utter_api_documentation
+
+- rule: Answer FAQ about authentication
+  steps:
+  - intent: authentication_help
+  - action: utter_authentication_help
+
+- rule: Answer FAQ about connector types
+  steps:
+  - intent: connector_types
+  - action: utter_connector_types
+
+- rule: Answer FAQ about troubleshooting
+  steps:
+  - intent: troubleshooting
+  - action: utter_troubleshooting
+
+- rule: Answer FAQ about integration
+  steps:
+  - intent: integration_help
+  - action: utter_integration_help
+
+- rule: Answer FAQ about supported platforms
+  steps:
+  - intent: supported_platforms
+  - action: utter_supported_platforms
+
+- rule: Answer FAQ about rate limits
+  steps:
+  - intent: rate_limits
+  - action: utter_rate_limits
+
+- rule: Answer FAQ about error codes
+  steps:
+  - intent: error_codes
+  - action: utter_error_codes
+
+- rule: Answer FAQ about contacting support
+  steps:
+  - intent: contact_support
+  - action: utter_contact_support
+
+- rule: Answer bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot

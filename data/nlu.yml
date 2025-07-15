@@ -1,0 +1,151 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - hey there
+    - hi bot
+    - hello bot
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+    - good night
+    - have a nice day
+    - see you around
+    - bye bye
+    - take care
+    - until next time
+
+- intent: what_is_sage_network_connectors
+  examples: |
+    - What is Sage Network Connectors?
+    - What are Sage Network Connectors?
+    - Tell me about Sage Network Connectors
+    - What do Sage Network Connectors do?
+    - Explain Sage Network Connectors
+    - What is the purpose of Sage Network Connectors?
+    - Can you explain what Sage Network Connectors are?
+    - What are network connectors in Sage?
+
+- intent: how_to_get_started
+  examples: |
+    - How do I get started?
+    - How to begin with Sage Network Connectors?
+    - Getting started guide
+    - Where do I start?
+    - How to start using the connectors?
+    - First steps with Sage Network Connectors
+    - How to begin development?
+    - What's the first thing I should do?
+
+- intent: api_documentation
+  examples: |
+    - Where is the API documentation?
+    - API docs
+    - Show me the API reference
+    - Where can I find API documentation?
+    - API documentation location
+    - Where are the API docs?
+    - I need API documentation
+    - Documentation for the API
+
+- intent: authentication_help
+  examples: |
+    - How do I authenticate?
+    - Authentication issues
+    - Help with authentication
+    - How to set up authentication?
+    - Authentication guide
+    - Login problems
+    - API key setup
+    - How to get API credentials?
+    - Authentication methods
+
+- intent: connector_types
+  examples: |
+    - What types of connectors are available?
+    - List of connector types
+    - Available connectors
+    - What connectors can I use?
+    - Types of network connectors
+    - Connector categories
+    - What kind of connectors exist?
+
+- intent: troubleshooting
+  examples: |
+    - I'm having issues
+    - Troubleshooting help
+    - Something is not working
+    - Error with connector
+    - Connection problems
+    - Help with errors
+    - Debugging assistance
+    - My connector is failing
+
+- intent: integration_help
+  examples: |
+    - How to integrate?
+    - Integration guide
+    - Help with integration
+    - How to connect my system?
+    - Integration steps
+    - How do I integrate with Sage?
+    - Connection setup
+    - System integration
+
+- intent: supported_platforms
+  examples: |
+    - What platforms are supported?
+    - Supported systems
+    - Platform compatibility
+    - Which platforms work?
+    - System requirements
+    - Compatible platforms
+    - What systems are supported?
+
+- intent: rate_limits
+  examples: |
+    - What are the rate limits?
+    - API rate limits
+    - Request limits
+    - How many requests can I make?
+    - Rate limiting information
+    - API quotas
+    - Request quotas
+
+- intent: error_codes
+  examples: |
+    - What does this error code mean?
+    - Error code explanation
+    - Understanding error codes
+    - Error code help
+    - What is error code 400?
+    - HTTP error codes
+    - API error meanings
+
+- intent: contact_support
+  examples: |
+    - How do I contact support?
+    - Contact information
+    - Support contact
+    - I need help from support
+    - Get in touch with support
+    - Support team contact
+    - How to reach support?
+
+- intent: bot_challenge
+  examples: |
+    - Are you a bot?
+    - Are you human?
+    - Am I talking to a bot?
+    - Are you real?
