@@ -124,7 +124,7 @@ pip install openai flask
 - Example: `https://your-resource.openai.azure.com/`
 
 ### "API Key issues"
-- Your key is already set: `7nmb9wlXxOVC1sZlkDTymY4jOn6u4ahkWAGBLcPXWMSPkDqefRQMJQQJ99BGACYeBjFXJ3w3AAABACOGbpXp`
+- Your key is already set: `YOUR_AZURE_OPENAI_API_KEY_HERE`
 - Verify it matches your Azure Portal key
 
 ---

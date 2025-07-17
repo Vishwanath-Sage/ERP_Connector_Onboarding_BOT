@@ -5,7 +5,7 @@
 ### Step 1: ✅ Your Azure OpenAI Key is Ready!
 Perfect! I can see you have an Azure OpenAI API key. Azure OpenAI keys are longer and have a different format than regular OpenAI keys.
 
-**Your key:** `7nmb9wlXxOVC1sZlkDTymY4jOn6u4ahkWAGBLcPXWMSPkDqefRQMJQQJ99BGACYeBjFXJ3w3AAABACOGbpXp`
+**Your key:** `YOUR_AZURE_OPENAI_API_KEY_HERE`
 
 ### Step 2: Run Setup
 Open PowerShell in your project folder and run:
