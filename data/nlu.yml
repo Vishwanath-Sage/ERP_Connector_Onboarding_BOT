@@ -26,6 +26,57 @@ nlu:
     - take care
     - until next time
 
+- intent: how_are_you
+  examples: |
+    - how are you?
+    - how are you doing?
+    - how's it going?
+    - how are things?
+    - what's up?
+    - how have you been?
+    - how are you today?
+    - how's your day?
+    - how do you feel?
+    - are you okay?
+    - how's everything?
+
+- intent: thanks
+  examples: |
+    - thanks
+    - thank you
+    - thank you so much
+    - thanks a lot
+    - appreciate it
+    - much appreciated
+    - cheers
+    - thx
+    - ty
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - yeah
+    - yep
+    - sure
+    - absolutely
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - nope
+    - nah
+
 - intent: what_is_sage_network_connectors
   examples: |
     - What is Sage Network Connectors?
@@ -385,3 +436,70 @@ nlu:
     - Are you human?
     - Am I talking to a bot?
     - Are you real?
+
+# DEVELOPER ASSISTANCE WITH MCP
+- intent: get_api_schema
+  examples: |
+    - Show me the API schema for bills
+    - What's the structure of the invoices API?
+    - I need the API documentation for vendors
+    - Can you show me the endpoint documentation?
+    - What fields are available in the bills API?
+    - API schema for payments
+    - Show me the API structure
+    - I need endpoint documentation
+
+- intent: test_api_endpoint
+  examples: |
+    - Can I test the bills API?
+    - Test this API endpoint for me
+    - Try calling the vendors API
+    - I want to test an API call
+    - Can you help me test this endpoint?
+    - Test the invoices API
+    - Make a test API call
+    - Try this API request
+
+- intent: get_code_examples
+  examples: |
+    - Show me a code example for bills
+    - How do I implement authentication in Python?
+    - I need a JavaScript example for invoices
+    - Sample code for vendor management
+    - Code example in C# for payments
+    - How to implement this in Java?
+    - Give me sample code
+    - Show implementation example
+
+- intent: check_api_status
+  examples: |
+    - Is the API working?
+    - Check API status
+    - Are the Sage APIs up?
+    - Is there any downtime?
+    - API health check
+    - System status
+    - Are the services running?
+    - Check if APIs are down
+
+- intent: mcp_developer_help
+  examples: |
+    - I'm building a connector and need help
+    - How do I integrate with Sage APIs?
+    - I need help with my connector development
+    - Can you assist with API integration?
+    - Help me build a Sage connector
+    - I'm developing an integration
+    - Connector development assistance
+    - Help with Sage API implementation
+
+- intent: generate_connector_code
+  examples: |
+    - Generate connector code for me
+    - Create a sample connector
+    - I need boilerplate code for integration
+    - Generate integration code
+    - Create connector template
+    - Build me a connector skeleton
+    - Connector code generation
+    - Help me create connector code

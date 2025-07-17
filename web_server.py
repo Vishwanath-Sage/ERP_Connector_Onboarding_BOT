@@ -1,5 +1,5 @@
 """
-Flask Web Server for Sage Network Connectors FAQ Bot
+Flask Web Server for Developer Onboarding Bot
 Serves the chatbot interface and handles API requests to Rasa
 """
 
@@ -17,7 +17,7 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sage Network Connectors FAQ Bot</title>
+            <title>Developer Onboarding Bot</title>
     <style>
         * {
             margin: 0;
@@ -194,14 +194,14 @@ HTML_TEMPLATE = """
 <body>
     <div class="chat-container">
         <div class="chat-header">
-            <h1>🤖 Sage Network Connectors FAQ Bot</h1>
+                            <h1>🤖 Developer Onboarding Bot</h1>
             <p>Get instant answers about APIs, authentication, integration, and more!</p>
         </div>
         
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">
                 <div class="message-content">
-                    Hello! Welcome to Sage Network Connectors FAQ Bot. I'm here to help you with questions about our APIs, authentication, integration guides, and troubleshooting. What would you like to know?
+                    Hello! Welcome to Developer Onboarding Bot. I'm here to help you with questions about our APIs, authentication, integration guides, and troubleshooting. What would you like to know?
                 </div>
             </div>
         </div>
@@ -379,7 +379,7 @@ def get_fallback_response(message):
     
     # Greetings
     if any(word in message_lower for word in ['hello', 'hi', 'hey', 'greet']):
-        return "Hello! Welcome to Sage Network Connectors FAQ Bot. I can help with detailed questions about Sage APIs, invoice models, authentication, and more!"
+        return "Hello! Welcome to Developer Onboarding Bot. I can help with detailed questions about Sage APIs, invoice models, authentication, and more!"
     
     # Sage Intacct Bills API
     elif any(phrase in message_lower for phrase in ['intacct', 'bill', 'invoice api', 'create bill', 'accounts payable']):
@@ -697,7 +697,7 @@ Comprehensive APIs and integration tools for connecting with Sage systems:
     
     # Default response
     else:
-        return """I'm your enhanced Sage Network Connectors FAQ Bot! I can help with:
+        return """I'm your enhanced Developer Onboarding Bot! I can help with:
 
 **🔧 Technical Topics:**
 • Sage Intacct Bills API & Invoice Models
@@ -714,7 +714,7 @@ Comprehensive APIs and integration tools for connecting with Sage systems:
 **Ask me anything about Sage APIs, authentication, error codes, or integration!**"""
 
 if __name__ == '__main__':
-    print("🚀 Starting Sage Network Connectors FAQ Bot Web Server...")
+    print("🚀 Starting Developer Onboarding Bot Web Server...")
     print("📖 Visit http://localhost:3000 to use the chatbot")
     print("🤖 The bot will connect to Rasa server when it's ready")
     

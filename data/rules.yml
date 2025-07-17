@@ -2,10 +2,35 @@ version: "3.1"
 
 rules:
 
+- rule: Say hello anytime the user says hello
+  steps:
+  - intent: greet
+  - action: utter_greet
+
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
+
+- rule: Respond to how are you
+  steps:
+  - intent: how_are_you
+  - action: utter_how_are_you
+
+- rule: Respond to thanks
+  steps:
+  - intent: thanks
+  - action: utter_thanks
+
+- rule: Respond to affirmation
+  steps:
+  - intent: affirm
+  - action: utter_affirm
+
+- rule: Respond to denial
+  steps:
+  - intent: deny
+  - action: utter_deny
 
 - rule: Answer FAQ about what is Sage Network Connectors
   steps:
@@ -192,3 +217,40 @@ rules:
   steps:
   - intent: reporting_analytics
   - action: utter_reporting_analytics
+
+# OPENAI FALLBACK RULES
+- rule: Use OpenAI for fallback when intent is not recognized
+  steps:
+  - intent: nlu_fallback
+  - action: action_openai_fallback
+
+# MCP Developer Assistance Rules
+- rule: Handle API schema requests
+  steps:
+  - intent: get_api_schema
+  - action: action_mcp_developer_assist
+
+- rule: Handle API testing requests
+  steps:
+  - intent: test_api_endpoint
+  - action: action_mcp_developer_assist
+
+- rule: Handle code example requests
+  steps:
+  - intent: get_code_examples
+  - action: action_mcp_developer_assist
+
+- rule: Handle API status checks
+  steps:
+  - intent: check_api_status
+  - action: action_mcp_developer_assist
+
+- rule: Handle general MCP developer help
+  steps:
+  - intent: mcp_developer_help
+  - action: action_mcp_developer_assist
+
+- rule: Handle connector code generation
+  steps:
+  - intent: generate_connector_code
+  - action: action_mcp_developer_assist

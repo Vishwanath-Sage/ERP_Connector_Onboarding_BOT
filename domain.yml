@@ -3,6 +3,10 @@ version: "3.1"
 intents:
   - greet
   - goodbye
+  - how_are_you
+  - thanks
+  - affirm
+  - deny
   - what_is_sage_network_connectors
   - how_to_get_started
   - api_documentation
@@ -40,15 +44,40 @@ intents:
   - data_synchronization
   - custom_fields
   - reporting_analytics
+  # MCP Developer Assistance Intents
+  - get_api_schema
+  - test_api_endpoint
+  - get_code_examples
+  - check_api_status
+  - mcp_developer_help
+  - generate_connector_code
 
 responses:
   utter_greet:
-  - text: "Hello! Welcome to Sage Network Connectors FAQ Bot. How can I help you today?"
+  - text: "Hello! Welcome to Developer Onboarding Bot. How can I help you today?"
   - text: "Hi there! I'm here to help you with questions about Sage Network Connectors. What would you like to know?"
 
   utter_goodbye:
   - text: "Goodbye! Feel free to come back if you have more questions about Sage Network Connectors."
   - text: "Have a great day! Don't hesitate to ask if you need more help with Sage Network Connectors."
+
+  utter_how_are_you:
+  - text: "I'm doing great, thank you for asking! I'm here and ready to help you with any questions about Sage Network Connectors."
+  - text: "I'm functioning perfectly and excited to assist you with Sage Network Connectors! How can I help you today?"
+  - text: "I'm doing well! Thanks for asking. I'm here to provide you with information about Sage Network Connectors APIs and integrations."
+
+  utter_thanks:
+  - text: "You're very welcome! I'm happy I could help you with Sage Network Connectors."
+  - text: "No problem at all! Feel free to ask if you have any more questions about Sage APIs."
+  - text: "My pleasure! Don't hesitate to reach out if you need more help with your integration."
+
+  utter_affirm:
+  - text: "Great! Let me know how else I can assist you with Sage Network Connectors."
+  - text: "Perfect! Is there anything else you'd like to know about Sage APIs?"
+
+  utter_deny:
+  - text: "No worries! Is there something else I can help you with regarding Sage Network Connectors?"
+  - text: "That's okay! Let me know if there's another topic you'd like to explore."
 
   utter_what_is_sage_network_connectors:
   - text: "Sage Network Connectors are APIs and integration tools that allow third-party applications to connect and interact with Sage systems. They provide secure, standardized ways to access Sage data and functionality."
@@ -162,7 +191,12 @@ responses:
   - text: "For additional support:\n• Check the developer portal documentation\n• Submit support tickets through the developer portal\n• Join the developer community forums\n• For urgent issues, contact enterprise support\n\nAlways include error details, request/response samples, and your API credentials (without sensitive data) when requesting help."
 
   utter_iamabot:
-  - text: "I'm a FAQ bot specifically designed to help with Sage Network Connectors questions. I can provide information about APIs, authentication, troubleshooting, and more!"
+  - text: "I'm a Developer Onboarding Bot specifically designed to help developers get started with Sage Network Connectors. I can provide information about APIs, authentication, troubleshooting, and more!"
+
+actions:
+  - action_openai_response
+  - action_openai_fallback
+  - action_mcp_developer_assist
 
 session_config:
   session_expiration_time: 60

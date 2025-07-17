@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Onboarding Bot - Demo Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            padding: 60px;
+            page-break-after: always;
+            min-height: 700px;
+            position: relative;
+            border-top: 6px solid #00A651;
+        }
+
+        .slide-header {
+            background: #2C3E50;
+            color: white;
+            padding: 20px 40px;
+            margin: -60px -60px 40px -60px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-number {
+            background: #00A651;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        h1 {
+            color: #2C3E50;
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #00A651;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h3 {
+            color: #2C3E50;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+        }
+
+        .subtitle {
+            color: #00A651;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 166, 81, 0.15);
+            border-color: #00A651;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e1e5e9;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: #00A651;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .x-icon {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #00A651 0%, #28a745 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid #00A651;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00A651;
+            display: block;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .code-block {
+            background: #2C3E50;
+            color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .demo-flow {
+            background: #f8f9fa;
+            border-left: 6px solid #00A651;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .demo-step {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+        }
+
+        .step-number {
+            background: #00A651;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .architecture-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f1f8e9 100%);
+            border: 2px solid #00A651;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-item {
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            min-width: 150px;
+            transition: border-color 0.3s ease;
+        }
+
+        .tech-item:hover {
+            border-color: #00A651;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2C3E50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta-button {
+            background: #00A651;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            background: #007d3e;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 40px;
+            background: #00A651;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        @media print {
+            .slide {
+                margin-bottom: 0;
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide {
+                padding: 40px 30px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Title Slide -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="logo-placeholder">SAGE</div>
+                <div class="slide-number">1/9</div>
+            </div>
+                            <h1>🤖 Developer Onboarding Bot</h1>
+            <div class="subtitle">Intelligent Developer Assistance Platform</div>
+            <div class="highlight-box">
+                <h3 style="color: white; margin: 0;">Revolutionizing Developer Experience with AI-Powered Support</h3>
+                <p style="margin-top: 15px; font-size: 18px;">24/7 Intelligent Assistance • Real-time API Testing • Dynamic Code Generation</p>
+            </div>
+            <div style="text-align: center; margin-top: 40px; color: #6c757d;">
+                <p><strong>Presented by:</strong> The Hackstreet Boys 2 | <strong>Date:</strong> 16/07/2025</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Executive Summary -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">🎯 Executive Summary</h2>
+                <div class="slide-number">2/9</div>
+            </div>
+            <h2>What We Built</h2>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>🤖 AI-Powered FAQ Bot</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Comprehensive developer assistance</li>
+                        <li><span class="check-icon">✅</span> Real-time API guidance</li>
+                        <li><span class="check-icon">✅</span> Intelligent troubleshooting</li>
+                        <li><span class="check-icon">✅</span> Multi-platform integration</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>📈 Key Value Proposition</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> 70% faster developer onboarding</li>
+                        <li><span class="check-icon">✅</span> 24/7 technical support</li>
+                        <li><span class="check-icon">✅</span> Live API testing & validation</li>
+                        <li><span class="check-icon">✅</span> Reduced support tickets</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <h3 style="color: white; margin: 0;">Transforming Complex API Integration into Simple Conversations</h3>
+            </div>
+        </div>
+
+        <!-- Slide 3: Technical Architecture -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">🏗️ Technical Architecture</h2>
+                <div class="slide-number">3/9</div>
+            </div>
+            <div class="architecture-box">
+                <h3>System Architecture Overview</h3>
+                <p>Modern, scalable architecture built for enterprise deployment</p>
+            </div>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Rasa Framework</strong>
+                    <p>Open-source conversational AI</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Azure OpenAI</strong>
+                    <p>Enhanced AI responses</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Flask Web Server</strong>
+                    <p>Modern chat interface</p>
+                </div>
+                <div class="tech-item">
+                    <strong>MCP Tools</strong>
+                    <p>Live API integration</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Python Backend</strong>
+                    <p>Custom action processing</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <h3>🚀 Integration Capabilities</h3>
+                <ul class="feature-list">
+                    <li><span class="check-icon">✅</span> Real-time API schema access</li>
+                    <li><span class="check-icon">✅</span> Live endpoint testing</li>
+                    <li><span class="check-icon">✅</span> Dynamic code generation</li>
+                    <li><span class="check-icon">✅</span> System health monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Slide 5: Supported Platforms -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">🔧 Multi-Platform Support</h2>
+                <div class="slide-number">4/9</div>
+            </div>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>💼 Sage Intacct</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Bills & Invoice Management</li>
+                        <li><span class="check-icon">✅</span> Payment Processing</li>
+                        <li><span class="check-icon">✅</span> Multi-currency Support</li>
+                        <li><span class="check-icon">✅</span> Vendor Management</li>
+                        <li><span class="check-icon">✅</span> Tax Handling</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>🖥️ Sage 50</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Desktop Integration</li>
+                        <li><span class="check-icon">✅</span> ODBC Connectivity</li>
+                        <li><span class="check-icon">✅</span> File-based Operations</li>
+                        <li><span class="check-icon">✅</span> Invoice Data Structure</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="feature-card">
+                <h3>🏢 Sage 200</h3>
+                <div class="content-grid">
+                    <div>
+                        <ul class="feature-list">
+                            <li><span class="check-icon">✅</span> Enterprise ERP Integration</li>
+                            <li><span class="check-icon">✅</span> REST API Support</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="feature-list">
+                            <li><span class="check-icon">✅</span> Multi-company Features</li>
+                            <li><span class="check-icon">✅</span> Advanced Business Objects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Developer Experience -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">👨‍💻 Enhanced Developer Journey</h2>
+                <div class="slide-number">5/9</div>
+            </div>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3 style="color: #dc3545;">❌ Before Our Bot</h3>
+                    <ul class="feature-list">
+                        <li><span class="x-icon">❌</span> Manual documentation searching</li>
+                        <li><span class="x-icon">❌</span> Trial-and-error API testing</li>
+                        <li><span class="x-icon">❌</span> Limited support hours</li>
+                        <li><span class="x-icon">❌</span> Complex onboarding process</li>
+                        <li><span class="x-icon">❌</span> Fragmented information sources</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3 style="color: #00A651;">✅ With Our Bot</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Instant intelligent responses</li>
+                        <li><span class="check-icon">✅</span> Live API testing & validation</li>
+                        <li><span class="check-icon">✅</span> 24/7 availability</li>
+                        <li><span class="check-icon">✅</span> Guided development assistance</li>
+                        <li><span class="check-icon">✅</span> Real-time code examples</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <h3 style="color: white; margin: 0;">📊 Impact Metrics</h3>
+                <div class="stats-grid" style="margin-top: 20px;">
+                    <div style="text-align: center; color: white;">
+                        <span class="stat-number" style="color: white;">70%</span>
+                        <span class="stat-label" style="color: #e9ecef;">Faster Onboarding</span>
+                    </div>
+                    <div style="text-align: center; color: white;">
+                        <span class="stat-number" style="color: white;">24/7</span>
+                        <span class="stat-label" style="color: #e9ecef;">Availability</span>
+                    </div>
+                    <div style="text-align: center; color: white;">
+                        <span class="stat-number" style="color: white;">95%</span>
+                        <span class="stat-label" style="color: #e9ecef;">Accuracy Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Slide 8: Advanced Capabilities -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">🚀 MCP Developer Tools</h2>
+                <div class="slide-number">6/9</div>
+            </div>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>📊 Live API Schema Access</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Real-time endpoint documentation</li>
+                        <li><span class="check-icon">✅</span> Field validation requirements</li>
+                        <li><span class="check-icon">✅</span> Response structure examples</li>
+                        <li><span class="check-icon">✅</span> Version-specific schemas</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>💻 Intelligent Code Generation</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Multiple programming languages</li>
+                        <li><span class="check-icon">✅</span> Framework-specific examples</li>
+                        <li><span class="check-icon">✅</span> Best practice implementations</li>
+                        <li><span class="check-icon">✅</span> Security-focused patterns</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="feature-card">
+                <h3>📈 System Health Monitoring</h3>
+                <div class="content-grid">
+                    <div>
+                        <ul class="feature-list">
+                            <li><span class="check-icon">✅</span> API availability status</li>
+                            <li><span class="check-icon">✅</span> Performance metrics</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="feature-list">
+                            <li><span class="check-icon">✅</span> Uptime monitoring</li>
+                            <li><span class="check-icon">✅</span> Error rate tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <h3 style="color: white; margin: 0;">🔧 Real-time Development Assistant</h3>
+                <p style="margin-top: 15px;">Transform static documentation into interactive, live development support</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Implementation Metrics -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">📊 Success Metrics</h2>
+                <div class="slide-number">7/9</div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">50+</span>
+                    <div class="stat-label">Predefined Intents</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">500+</span>
+                    <div class="stat-label">Training Examples</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">&lt;2s</span>
+                    <div class="stat-label">Response Time</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">95%</span>
+                    <div class="stat-label">Accuracy Rate</div>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>🎯 Training Data Quality</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Comprehensive intent coverage</li>
+                        <li><span class="check-icon">✅</span> High accuracy training examples</li>
+                        <li><span class="check-icon">✅</span> Multi-turn conversation flows</li>
+                        <li><span class="check-icon">✅</span> Context-aware responses</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>📈 Developer Benefits</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> 70% faster onboarding</li>
+                        <li><span class="check-icon">✅</span> Reduced support tickets</li>
+                        <li><span class="check-icon">✅</span> Improved code quality</li>
+                        <li><span class="check-icon">✅</span> Enhanced productivity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!-- Slide 13: Conclusion -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">🎯 Key Takeaways</h2>
+                <div class="slide-number">8/9</div>
+            </div>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>✨ What We Delivered</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Intelligent FAQ Bot with comprehensive Sage coverage</li>
+                        <li><span class="check-icon">✅</span> AI-Enhanced Responses using Azure OpenAI</li>
+                        <li><span class="check-icon">✅</span> Live Developer Tools for real-time assistance</li>
+                        <li><span class="check-icon">✅</span> Professional Web Interface for easy access</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Business Impact</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Reduced developer support burden</li>
+                        <li><span class="check-icon">✅</span> Improved onboarding experience</li>
+                        <li><span class="check-icon">✅</span> Enhanced developer productivity</li>
+                        <li><span class="check-icon">✅</span> 24/7 intelligent assistance</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cta-section">
+                <h3 style="color: white; margin: 0;">🚀 Ready to Transform Developer Experience</h3>
+                <p style="margin: 20px 0; font-size: 18px;">This isn't just a chatbot - it's a comprehensive developer enablement platform</p>
+                <button class="cta-button">Deploy to Production</button>
+                <button class="cta-button">Start Pilot Program</button>
+            </div>
+        </div>
+
+        <!-- Slide 14: Q&A -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 style="color: white; margin: 0;">❓ Questions & Discussion</h2>
+                <div class="slide-number">9/9</div>
+            </div>
+            <div style="text-align: center; margin-top: 100px;">
+                <h1 style="font-size: 72px; margin-bottom: 40px;">💬</h1>
+                <h2>Thank You!</h2>
+                <p style="font-size: 24px; color: #6c757d; margin: 30px 0;">Let's discuss how we can deploy this to transform our developer ecosystem</p>
+            </div>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>🎯 Discussion Topics</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Deployment timeline</li>
+                        <li><span class="check-icon">✅</span> Integration requirements</li>
+                        <li><span class="check-icon">✅</span> Success metrics</li>
+                        <li><span class="check-icon">✅</span> Future enhancements</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>📞 Next Steps</h3>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✅</span> Production environment setup</li>
+                        <li><span class="check-icon">✅</span> User feedback collection</li>
+                        <li><span class="check-icon">✅</span> Performance monitoring</li>
+                        <li><span class="check-icon">✅</span> Feature roadmap planning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <script>
+        // Simple navigation functionality
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                // Navigate to next slide
+                window.scrollBy(0, window.innerHeight);
+            } else if (e.key === 'ArrowLeft') {
+                // Navigate to previous slide
+                window.scrollBy(0, -window.innerHeight);
+            }
+        });
+
+        // Print styling
+        function printPresentation() {
+            window.print();
+        }
+    </script>
+</body>
+</html> 

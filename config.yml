@@ -38,7 +38,7 @@ policies:
   - name: MemoizationPolicy
   - name: RulePolicy
     core_fallback_threshold: 0.3
-    core_fallback_action_name: "action_default_fallback"
+    core_fallback_action_name: "action_openai_fallback"  # Use OpenAI for fallbacks
     enable_fallback_prediction: True
   - name: UnexpecTEDIntentPolicy
     max_history: 3  # Reduced from 5 for simpler conversations

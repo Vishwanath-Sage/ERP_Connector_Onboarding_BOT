@@ -1,6 +1,6 @@
-# Sage Network Connectors FAQ Bot
+# Developer Onboarding Bot
 
-A comprehensive FAQ chatbot built with Rasa and Flask for answering questions about Sage Network Connectors.
+A comprehensive onboarding chatbot built with Rasa and Flask for helping developers get started with Sage Network Connectors.
 
 ## 🚀 Features
 

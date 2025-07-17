@@ -1,0 +1,26 @@
+🎯 YOUR AZURE OPENAI CONFIGURATION
+=====================================
+
+✅ API KEY: 7nmb9wlXxOVC1sZlkDTymY4jOn6u4ahkWAGBLcPXWMSPkDqefRQMJQQJ99BGACYeBjFXJ3w3AAABACOGbpXp
+✅ ENDPOINT: https://hackathon-azure-openai-east-us.openai.azure.com/
+✅ DEPLOYMENT: o4-mini
+✅ API VERSION: 2025-01-01-preview
+
+🚀 READY TO USE! Copy these commands:
+
+PowerShell Configuration:
+-------------------------
+$env:AZURE_OPENAI_API_KEY = "YOUR_AZURE_OPENAI_API_KEY_HERE"
+$env:AZURE_OPENAI_ENDPOINT = "https://hackathon-azure-openai-east-us.openai.azure.com/"
+$env:AZURE_OPENAI_DEPLOYMENT = "o4-mini"
+
+Permanent Setup:
+----------------
+[System.Environment]::SetEnvironmentVariable("AZURE_OPENAI_API_KEY", "YOUR_AZURE_OPENAI_API_KEY_HERE", [System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable("AZURE_OPENAI_ENDPOINT", "https://hackathon-azure-openai-east-us.openai.azure.com/", [System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT", "o4-mini", [System.EnvironmentVariableTarget]::User)
+
+🔧 Test Your Configuration:
+---------------------------
+Your curl command works! Try:
+curl https://hackathon-azure-openai-east-us.openai.azure.com/openai/deployments/o4-mini/chat/completions?api-version=2025-01-01-preview -H "api-key: 7nmb9wlXxOVC1sZlkDTymY4jOn6u4ahkWAGBLcPXWMSPkDqefRQMJQQJ99BGACYeBjFXJ3w3AAABACOGbpXp" -H "Content-Type: application/json" -d '{"messages": [{"role": "user", "content": "Hello from Sage FAQ Bot!"}], "max_completion_tokens": 50}' 

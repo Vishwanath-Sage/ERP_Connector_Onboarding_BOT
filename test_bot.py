@@ -1,5 +1,5 @@
 """
-Test script for Sage Network Connectors FAQ Bot
+Test script for Developer Onboarding Bot
 Tests various FAQ intents and responses
 """
 
@@ -29,7 +29,7 @@ def test_rasa_bot():
         "Goodbye"
     ]
     
-    print("🤖 Testing Sage Network Connectors FAQ Bot")
+    print("🤖 Testing Developer Onboarding Bot")
     print("=" * 50)
     
     for i, question in enumerate(test_questions, 1):
